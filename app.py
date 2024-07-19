@@ -1,6 +1,7 @@
 import os
 import telebot
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 TOKEN = os.getenv('TOKEN', 'token')
 USER_ID = os.getenv('USER_ID', 'uid')
 

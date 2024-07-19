@@ -18,16 +18,16 @@ def send_message():
     data = request.json
     print(f"Received POST data: {data}")
 
-    # Extract the value of "id"
-    msg = [alert['annotations']['msg'] for alert in data.get('alerts', [])]
-    print(f"Extracted ids: {msg}")
+    # Extract the value of "msg"
+    messages = [alert['annotations']['msg'] for alert in data.get('alerts', []) if 'msg' in alert['annotations']]
+    print(f"Extracted messages: {messages}")
 
-    # Optionally, send a message to the USER_ID with the extracted ids
-    if msg:
-        for msg_value in msg:
-            bot.send_message(USER_ID, f"Extracted id: {msg_value}")
+    # Optionally, send a message to the USER_ID with the extracted messages
+    if messages:
+        for msg in messages:
+            bot.send_message(USER_ID, f"{msg}")
 
-    return jsonify({"message": "Message sent to the user!", "msg": msg}), 200
+    return jsonify({"message": "Messages sent to the user!", "msgs": messages}), 200
 
 # Start the Flask web server on port 5000
 if __name__ == '__main__':

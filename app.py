@@ -22,6 +22,7 @@ def send_message():
     messages = [alert['annotations']['msg'] for alert in data.get('alerts', []) if 'msg' in alert['annotations']]
     print(f"Extracted messages: {messages}")
 
+    print(USER_ID)
     # Optionally, send a message to the USER_ID with the extracted messages
     if messages:
         for msg in messages:
